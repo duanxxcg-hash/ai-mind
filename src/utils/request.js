@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { ElMessage } from 'element-plus';
 
-const request = axios.create(
+const request = axios.create(    //创建一个axios实例
     {
         baseURL: '/api', //请求的前缀
         timeout: 5000, //超时时间
@@ -31,7 +31,7 @@ request.interceptors.response.use(
         }
 
         else {
-            //登录过期（只有本身有token时收到-1才说明是过期，没token时是普通业务错误）
+            //登录过期（只有本身有token时收到-1才说明是过期，没token时是普通业务错误 交由err处理）
             if (data.code === '-1') {
                 const token = localStorage.getItem('token')
                 if (token && !config.url?.includes('/login')) {

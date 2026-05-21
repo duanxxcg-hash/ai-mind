@@ -402,6 +402,7 @@ const startAIResponse = (sessionId, userMsg) => {
             'Accept': 'text/event-stream'
         },
         body: JSON.stringify({ sessionId, userMessage: userMsg }),
+         openWhenHidden: true,
         signal: ctrl.signal, //绑定遥控器信号 用来控制ctrl.abort()
 
         onopen: (response) => {
