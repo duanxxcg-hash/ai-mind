@@ -195,12 +195,12 @@ import { ElMessage } from 'element-plus';
 import MarkdownRenderer from '../components/MarkdownRenderer.vue';
 import {fetchEventSource} from '@microsoft/fetch-event-source'
 
-const chatMessagesRef = ref(null)
+const chatMessagesRef = ref(null) //这个ref是用来获取聊天消息区域的DOM元素的 以便在AI回复时自动滚动到底部显示最新消息
 
 const scrollToBottom = () => {
-    nextTick(() => {
+    nextTick(() => { 
         if (chatMessagesRef.value) {
-            chatMessagesRef.value.scrollTop = chatMessagesRef.value.scrollHeight
+            chatMessagesRef.value.scrollTop = chatMessagesRef.value.scrollHeight //将它的“滚动高度(scrollTop)”设置为它的“内容总高度(scrollHeight)”
         }
     })
 }
@@ -392,17 +392,17 @@ const startAIResponse = (sessionId, userMsg) => {
     messages.value.push(aiMessage)
     const currentBubble = messages.value[messages.value.length - 1]
 
-    const ctrl = new AbortController()
+    const ctrl = new AbortController() //遥控器 用来控制流式请求的中止（当AI回复完成时 就可以调用它来中止请求 以节省资源）
 
     fetchEventSource('/api/psychological-chat/stream', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
+            'Content-Type': 'application/json', //告诉后端发过去的请求体是什么格式 让它知道如何解析
             'Token': localStorage.getItem('token'),
             'Accept': 'text/event-stream'
         },
         body: JSON.stringify({ sessionId, userMessage: userMsg }),
-        signal: ctrl.signal,
+        signal: ctrl.signal, //绑定遥控器信号 用来控制ctrl.abort()
 
         onopen: (response) => {
             if(response.headers.get('Content-Type') !== 'text/event-stream'){
