@@ -18,7 +18,7 @@
                     <el-input v-model="formData.nickname" placeholder="请输入昵称（可选）" size="large"/>
                 </el-form-item>
                 <el-form-item label="手机号" prop="phone">
-                    <el-input v-model="formData.phone" placeholder="请输入手机号（可选）" size="large"/>
+                    <el-input v-model="formData.phone" placeholder="请输入手机号" size="large"/>
                 </el-form-item>
                 <el-form-item label="密码" prop="password">
                     <el-input v-model="formData.password" placeholder="请输入密码" size="large" type="password" show-password />
