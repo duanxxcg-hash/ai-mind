@@ -129,12 +129,10 @@ router.beforeEach((to, from, next) => {
         }
 
     } else {
-        //如果此未登录用户想访问后台页面
-        if (to.path.startsWith('/back')) {
-            next('/auth/login')
-        } else {
-            //如果是访问不需登录的前台页面，可以放行
+        if (to.path === '/' || to.path.startsWith('/auth')) {
             next()
+        } else {
+            next('/auth/login')
         }
     }
 
