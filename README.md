@@ -25,7 +25,7 @@
 
 ## 项目亮点
 
-- SSE 流式对话使用 `streamCompleted` 标志位防止断线重连导致内容重复
+- SSE 流式对话使用 `streamCompleted`对异常断流补救
 - Axios 响应拦截器统一处理 token 过期跳转，区分登录态与未登录态的错误处理
 - 聊天区域使用 `nextTick` 确保 DOM 更新后再执行自动滚动
 - Vercel 部署配置 API 反向代理，解决跨域问题

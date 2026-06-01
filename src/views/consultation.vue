@@ -443,7 +443,7 @@ const startAIResponse = (sessionId, userMsg) => {
         },
 
         onclose: () => {
-            if(!streamCompleted) loadSessionEmotion(sessionId)
+            if(!streamCompleted) loadSessionEmotion(sessionId)  //异常断流补救
             throw new Error('stream closed')  // 阻止重连
         }
     })

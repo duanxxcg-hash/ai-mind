@@ -3,6 +3,7 @@ import BackendLayout from "@/components/BackendLayout.vue";
 import AuthLayout from "@/components/AuthLayout.vue";
 import FrontedLayout from '@/components/FrontedLayout.vue'
 
+//后台路由
 const backendRoutes = [
     {
         path: '/back',
