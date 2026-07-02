@@ -1,6 +1,22 @@
 {
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
   "rewrites": [
-    { "source": "/api/:path*", "destination": "http://159.75.169.224:1235/api/:path*" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/files/(.*)",
+      "destination": "http://159.75.169.224:1235/files/$1"
+    },
+    {
+      "source": "/api/ai-search",
+      "destination": "/api/ai-search"
+    },
+    {
+      "source": "/api/:path*",
+      "destination": "http://159.75.169.224:1235/api/:path*"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }

@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="title">
-            <div class="back-home">
+            <div class="back-home" @click="backTohome">
                 <el-icon><Back /></el-icon>
                 <span>返回首页</span>
             </div>
@@ -56,6 +56,10 @@ const rules = reactive({
     ]
 })
 const router = useRouter()
+
+const backTohome = ()=>{
+    router.push('/')
+}
 
 //要把菜单实例作为参数（formEL）传给这个点击函数，才能在函数内部调用菜单实例的 validate 方法来验证表单数据
 //验证数据 向后端发出请求
