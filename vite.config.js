@@ -9,6 +9,40 @@ export default defineConfig({
       '@': resolve(__dirname, 'src'),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        // Vite 8 底层 Rolldown，manualChunks 必须为函数；按依赖类别拆独立 chunk
+        manualChunks(id) {
+          if (!id.includes('node_modules')) return
+          // element-plus 内部包含 'vue' 子串，所以必须放在 vue 判断之前
+          if (id.includes('element-plus') || id.includes('@element-plus')) {
+            return 'vendor-element'
+          }
+          if (id.includes('echarts') || id.includes('zrender')) {
+            return 'vendor-echarts'
+          }
+          if (id.includes('lodash-es')) {
+            return 'vendor-lodash'
+          }
+          if (id.includes('@wangeditor')) {
+            return 'vendor-wangeditor'
+          }
+          if (id.includes('@microsoft')) {
+            return 'vendor-fetch-event-source'
+          }
+          if (id.includes('axios')) {
+            return 'vendor-axios'
+          }
+          if (id.includes('vue') || id.includes('pinia') || id.includes('vue-router') || id.includes('@vue')) {
+            return 'vendor-vue'
+          }
+          // 其余 node_modules 统一归入 vendor-common
+          return 'vendor-common'
+        },
+      },
+    },
+  },
   server: {
     proxy: {
       '/files': {
